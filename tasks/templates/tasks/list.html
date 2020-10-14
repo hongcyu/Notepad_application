@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notepad online demo</title>
+</head>
+
+<body>
+    <h3>
+        Notepad application!
+    </h3>
+
+    <form method="POST" action="/">
+        {% csrf_token %}
+        {{form.title}}
+        <input type="submit" name="Create Task">
+    </form>
+
+    {%for task in tasks%}
+    <div>
+        <a href="{% url 'update_task' task.id %}">Update</a>
+        <a href="{% url 'delete_task' task.id %}">Delete</a>
+        {% if task.complete == True %}
+        <del> {{task}} </del>
+        {% else %}
+        <span> {{task}} </span>
+        {% endif %}
+
+    </div>
+    {%endfor%}
+</body>
+
+</html>
