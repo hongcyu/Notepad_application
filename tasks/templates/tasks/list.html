@@ -2,34 +2,83 @@
 <html lang="zh-CN">
 
 <head>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notepad online demo</title>
 </head>
 
-<body>
-    <h3>
-        Notepad application!
-    </h3>
+<style>
+    body {
+        background-color: #638cB8;
+    }
 
-    <form method="POST" action="/">
-        {% csrf_token %}
-        {{form.title}}
-        <input type="submit" name="Create Task">
-    </form>
+    input {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+    }
 
-    {%for task in tasks%}
-    <div>
-        <a href="{% url 'update_task' task.id %}">Update</a>
-        <a href="{% url 'delete_task' task.id %}">Delete</a>
-        {% if task.complete == True %}
-        <del> {{task}} </del>
-        {% else %}
-        <span> {{task}} </span>
-        {% endif %}
+    input::placeholder {
+        color: #d3d3d3;
+    }
 
-    </div>
-    {%endfor%}
-</body>
+    h1,h2,h3{
+        color:lightseagreen;
+        text-align: center;
+    }
+    .submit {
+        background-color: #6ba3e8;
+    }
+
+    .center-column {
+        width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 3px;
+        box-shadow: 6px 2px 30px 0px rgba(0, 0, 0, 0.75);
+    }
+
+    .item-row {
+        background-color: #906abd;
+        margin: 10px;
+        padding: 20px;
+        border-radius: 3px;
+        color: #ffffff;
+        font-size: 18px;
+        box-shadow: 0px -1px 10px -4px rgba(0, 0, 0, 0.75);
+    }
+
+    .btn-danger {
+        background-color: #ffae19;
+        border-color: #e59400;
+    }
+</style>
+<div class="center-column">
+
+    <body>
+        <h2>Notepad</h2>
+
+        <form method="POST" action="/">
+            {% csrf_token %}
+            {{form.title}}
+            <input type="submit" name="Create Task" class="btn btn-info">
+        </form>
+        {%for task in tasks%}
+        <div class="item-row">
+            <a class="btn btn-sm btn-info" href="{% url 'update_task' task.id %}">修改</a>
+            <a class="btn btn-sm btn-danger" href="{% url 'delete_task' task.id %}">删除</a>
+            {% if task.complete == True %}
+            <del> {{task}} </del>
+            {% else %}
+            <span> {{task}} </span>
+            {% endif %}
+        </div>
+        {%endfor%}
+    </body>
+</div>
 
 </html>
