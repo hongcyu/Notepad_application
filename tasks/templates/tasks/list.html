@@ -57,6 +57,7 @@
         background-color: #ffae19;
         border-color: #e59400;
     }
+
 </style>
 <div class="center-column">
 
@@ -71,7 +72,7 @@
         {%for task in tasks%}
         <div class="item-row">
             <a class="btn btn-sm btn-info" href="{% url 'update_task' task.id %}">修改</a>
-            <a class="btn btn-sm btn-danger" href="{% url 'delete_task' task.id %}">删除</a>
+            <a class="btn btn-sm btn-danger " href="{% url 'delete_task' task.id %}">删除</a>
             {% if task.complete == True %}
             <del> {{task}} </del>
             {% else %}
